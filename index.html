@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>波動鑑定 - 運命の数字があなたを導きます</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            font-family: 'Noto Sans JP', sans-serif;
+        }
+        .mystical-bg {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .number-button {
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        .number-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            border-color: #fff;
+        }
+        .blur-text {
+            filter: blur(3px);
+            pointer-events: none;
+            user-select: none;
+        }
+        .reading-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 20px 0;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+        .line-button {
+            background: linear-gradient(45deg, #00B900, #00E000);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            margin: 20px 0;
+        }
+        .line-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0,185,0,0.3);
+        }
+        .admin-panel {
+            display: none;
+            background: rgba(0,0,0,0.9);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        .search-box {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 20px;
+            padding: 5px 15px;
+            border: none;
+            outline: none;
+            font-size: 14px;
+            width: 120px;
+        }
+        .stars {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+        .instruction-notice {
+            background: linear-gradient(45deg, #ff9a9e, #fecfef);
+            border-radius: 15px;
+            padding: 15px;
+            margin: 15px 0;
+            border-left: 5px solid #ff6b6b;
+            color: #333;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+    <input type="text" class="search-box" placeholder="検索..." id="searchBox">
+    
+    <div class="container mx-auto px-4 py-8">
+        <div class="mystical-bg rounded-3xl p-8 max-w-4xl mx-auto">
+            <h1 class="text-4xl font-bold text-center text-gray-800 mb-2">
+                <i class="fas fa-star-of-david text-purple-600 mr-3"></i>
+                波動鑑定
+                <i class="fas fa-star-of-david text-purple-600 ml-3"></i>
+            </h1>
+            <p class="text-center text-gray-600 mb-8">あなたの運命の数字が宇宙からのメッセージを伝えます</p>
+            
+            <div class="text-center mb-8">
+                <h2 class="text-2xl font-semibold text-gray-700 mb-6">運命の番号を選んでください</h2>
+                <div class="grid grid-cols-4 gap-4 max-w-lg mx-auto">
+                    <button class="number-button text-white font-bold py-4 px-6 rounded-full text-xl" onclick="showReading(1)">①</button>
+                    <button class="number-button text-white font-bold py-4 px-6 rounded-full text-xl" onclick="showReading(2)">②</button>
+                    <button class="number-button text-white font-bold py-4 px-6 rounded-full text-xl" onclick="showReading(3)">③</button>
+                    <button class="number-button text-white font-bold py-4 px-6 rounded-full text-xl" onclick="showReading(4)">④</button>
+                    <button class="number-button text-white font-bold py-4 px-6 rounded-full text-xl" onclick="showReading(5)">⑤</button>
+                    <button class="number-button text-white font-bold py-4 px-6 rounded-full text-xl" onclick="showReading(6)">⑥</button>
+                    <button class="number-button text-white font-bold py-4 px-6 rounded-full text-xl" onclick="showReading(7)">⑦</button>
+                    <button class="number-button text-white font-bold py-4 px-6 rounded-full text-xl" onclick="showReading(8)">⑧</button>
+                </div>
+            </div>
+            
+            <div id="readingResult" style="display: none;">
+                <div class="reading-card">
+                    <h3 class="text-2xl font-bold text-center text-purple-600 mb-4">
+                        <i class="fas fa-crystal-ball mr-2"></i>
+                        あなたの波動鑑定結果
+                    </h3>
+                    <div id="readingText" class="text-gray-700 leading-relaxed text-lg"></div>
+                    <div id="blurredText" class="blur-text text-gray-700 leading-relaxed text-lg mt-4"></div>
+                    
+                    <div class="instruction-notice">
+                        <i class="fas fa-info-circle mr-2"></i>
+                        LINE追加後、このページに戻ると全文表示されます
+                    </div>
+                    
+                    <div class="text-center">
+                        <a href="https://lin.ee/aYxAyTn" target="_blank" class="line-button">
+                            <i class="fab fa-line mr-2"></i>
+                            さらに詳しく見る
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="adminPanel" class="admin-panel">
+                <h3 class="text-xl font-bold mb-4">管理者パネル</h3>
+                <div class="mb-4">
+                    <label class="block mb-2">編集する番号:</label>
+                    <select id="editNumber" class="w-full p-2 text-black rounded">
+                        <option value="1">①</option>
+                        <option value="2">②</option>
+                        <option value="3">③</option>
+                        <option value="4">④</option>
+                        <option value="5">⑤</option>
+                        <option value="6">⑥</option>
+                        <option value="7">⑦</option>
+                        <option value="8">⑧</option>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label class="block mb-2">鑑定文章（前半部分）:</label>
+                    <textarea id="frontText" class="w-full p-2 text-black rounded h-32"></textarea>
+                </div>
+                <div class="mb-4">
+                    <label class="block mb-2">鑑定文章（後半部分）:</label>
+                    <textarea id="backText" class="w-full p-2 text-black rounded h-32"></textarea>
+                </div>
+                <button onclick="updateReading()" class="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600">更新</button>
+                <button onclick="hideAdmin()" class="bg-gray-500 text-white px-6 py-2 rounded hover:bg-gray-600 ml-2">閉じる</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 星の生成
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            for (let i = 0; i < 100; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.width = Math.random() * 3 + 1 + 'px';
+                star.style.height = star.style.width;
+                star.style.animationDelay = Math.random() * 3 + 's';
+                starsContainer.appendChild(star);
+            }
+        }
+        createStars();
+
+        // 鑑定データの初期化
+        let readings = {
+            1: {
+                front: "あなたの魂は新しい始まりを求めています。数字①は創造性と独立性を象徴し、宇宙があなたに新たな道を歩むよう導いています。今この瞬間、あなたの周りには見えないエネルギーが渦巻いており...",
+                back: "特に恋愛面では、運命の人との出会いが近づいています。金運においても、新しいチャンスが3ヶ月以内に現れるでしょう。健康面では体調管理に注意が必要ですが、総合的に見て非常に良い波動を感じます。"
+            },
+            2: {
+                front: "協調性と調和があなたの人生のテーマです。数字②は人間関係における深いつながりを意味し、周囲との絆がより一層深まる時期にあります。あなたの優しさが多くの人を救い...",
+                back: "特にパートナーシップに関して重要な決断の時が来ています。仕事面では同僚との協力が成功の鍵となります。直感を信じて行動することで、想像以上の成果を得られるでしょう。"
+            },
+            3: {
+                front: "創造性と表現力が高まっています。数字③は芸術的才能とコミュニケーション能力を表し、あなたの内なる声が外の世界に響き渡ろうとしています。新しいアイデアが次々と浮かび...",
+                back: "特に創作活動や自己表現の分野で大きな成功を収める可能性があります。金銭面では予期しない収入源が現れるかもしれません。健康面では精神的な充実感が体調の改善をもたらします。"
+            },
+            4: {
+                front: "安定性と実行力があなたの強みです。数字④は堅実な基盤作りを象徴し、コツコツと積み重ねてきた努力が実を結ぶ時期に入っています。周囲からの信頼も厚く...",
+                back: "キャリアにおいて重要な昇進や転機が訪れます。家庭運も上昇し、家族との絆が深まるでしょう。投資や貯蓄に関しても良いタイミングです。忍耐強く継続することで大きな成果を得られます。"
+            },
+            5: {
+                front: "自由と変化への渇望が強まっています。数字⑤は冒険心と多様性を意味し、新しい経験や知識を求める気持ちが高まっています。今までの枠を超えて新しい世界へ...",
+                back: "旅行や引っ越し、転職など環境の変化が良い結果をもたらします。学習意欲も高まり、新しいスキルを身につけるチャンスです。恋愛面では刺激的な出会いが期待できます。"
+            },
+            6: {
+                front: "愛と責任感が人生の中心にあります。数字⑥は家族愛と奉仕の精神を表し、あなたの温かい心が多くの人を癒しています。特に家庭や地域社会での役割が重要になり...",
+                back: "結婚や出産など人生の重要な節目が近づいています。健康面では家族の健康管理にも気を配る必要があります。経済面では家族のための支出が増えますが、それが将来的な幸福につながります。"
+            },
+            7: {
+                front: "内省と精神性の高まりを感じています。数字⑦は神秘性と深い洞察力を象徴し、あなたの第六感が研ぎ澄まされています。隠れた真実や深い知識への興味が...",
+                back: "スピリチュアルな能力が開花し、直感的な判断が正確になります。研究や学問の分野で重要な発見をする可能性があります。一人の時間を大切にすることで、内なる声がより明確に聞こえてきます。"
+            },
+            8: {
+                front: "成功と達成への強い意志を感じます。数字⑧は物質的な豊かさと権力を象徴し、あなたのリーダーシップが周囲に大きな影響を与えています。ビジネスや投資において...",
+                back: "大きな成功を収め、経済的な安定を手に入れるでしょう。しかし、成功と引き換えに失うものもあるため、バランスを保つことが重要です。健康管理とストレス解消に十分注意してください。"
+            }
+        };
+
+        // 検索機能
+        document.getElementById('searchBox').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' && this.value === '1995') {
+                showAdmin();
+                this.value = '';
+            }
+        });
+
+        // 鑑定表示機能
+        function showReading(number) {
+            const reading = readings[number];
+            document.getElementById('readingText').textContent = reading.front;
+            document.getElementById('blurredText').textContent = reading.back;
+            document.getElementById('readingResult').style.display = 'block';
+            
+            // スムーズスクロール
+            document.getElementById('readingResult').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // 管理者パネル表示
+        function showAdmin() {
+            document.getElementById('adminPanel').style.display = 'block';
+            loadCurrentReading();
+        }
+
+        function hideAdmin() {
+            document.getElementById('adminPanel').style.display = 'none';
+        }
+
+        // 現在の鑑定文を読み込み
+        function loadCurrentReading() {
+            const number = document.getElementById('editNumber').value;
+            const reading = readings[number];
+            document.getElementById('frontText').value = reading.front;
+            document.getElementById('backText').value = reading.back;
+        }
+
+        // 番号選択時に鑑定文を更新
+        document.getElementById('editNumber').addEventListener('change', loadCurrentReading);
+
+        // 鑑定文更新
+        function updateReading() {
+            const number = document.getElementById('editNumber').value;
+            const frontText = document.getElementById('frontText').value;
+            const backText = document.getElementById('backText').value;
+            
+            readings[number] = {
+                front: frontText,
+                back: backText
+            };
+            
+            alert('鑑定文が更新されました！');
+        }
+
+        // LINE追加後の戻り判定（実際の実装では外部システムと連携）
+        function checkLineStatus() {
+            // この部分は実際のLINE連携システムで実装
+            // デモ用の簡易実装
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('line') === 'added') {
+                // 全文表示モード
+                document.querySelectorAll('.blur-text').forEach(el => {
+                    el.classList.remove('blur-text');
+                });
+            }
+        }
+
+        // ページ読み込み時にLINE追加状態をチェック
+        window.addEventListener('load', checkLineStatus);
+    </script>
+</body>
+</html>
