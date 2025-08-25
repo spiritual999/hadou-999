@@ -7,156 +7,149 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap');
+        
         body {
+            font-family: 'Noto Sans JP', sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            font-family: 'Noto Sans JP', sans-serif;
         }
-        .mystical-bg {
+        
+        .mystical-card {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
         }
-        .number-button {
-            background: linear-gradient(45deg, #ff6b6b, #feca57);
+        
+        .number-btn {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
             transition: all 0.3s ease;
-            border: 2px solid transparent;
         }
-        .number-button:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-            border-color: #fff;
+        
+        .number-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(240, 147, 251, 0.4);
         }
-        .blur-text {
-            filter: blur(3px);
-            pointer-events: none;
-            user-select: none;
+        
+        .blur-effect {
+            position: relative;
+            overflow: hidden;
         }
-        .reading-card {
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 20px;
-            padding: 30px;
-            margin: 20px 0;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        
+        .blur-effect::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 60%;
+            background: linear-gradient(transparent, rgba(255,255,255,0.9), rgba(255,255,255,1));
+            backdrop-filter: blur(3px);
         }
-        .line-button {
-            background: linear-gradient(45deg, #00B900, #00E000);
-            color: white;
-            padding: 15px 30px;
-            border-radius: 50px;
-            font-weight: bold;
-            text-decoration: none;
-            display: inline-block;
-            transition: all 0.3s ease;
-            margin: 20px 0;
+        
+        .sparkle {
+            animation: sparkle 2s infinite alternate;
         }
-        .line-button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 20px rgba(0,185,0,0.3);
+        
+        @keyframes sparkle {
+            0% { opacity: 0.3; }
+            100% { opacity: 1; }
         }
+        
         .admin-panel {
             display: none;
-            background: rgba(0,0,0,0.9);
-            color: white;
-            padding: 20px;
-            border-radius: 10px;
-            margin: 20px 0;
         }
+        
         .search-box {
             position: absolute;
             top: 20px;
             right: 20px;
-            background: rgba(255,255,255,0.8);
-            border-radius: 20px;
-            padding: 5px 15px;
-            border: none;
-            outline: none;
-            font-size: 14px;
             width: 120px;
         }
-        .stars {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            z-index: -1;
-        }
-        .star {
-            position: absolute;
-            background: white;
-            border-radius: 50%;
-            animation: twinkle 3s infinite;
-        }
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.3; }
-            50% { opacity: 1; }
-        }
-        .instruction-notice {
-            background: linear-gradient(45deg, #ff9a9e, #fecfef);
-            border-radius: 15px;
-            padding: 15px;
-            margin: 15px 0;
-            border-left: 5px solid #ff6b6b;
-            color: #333;
-            font-weight: bold;
+        
+        @media (max-width: 640px) {
+            .search-box {
+                position: relative;
+                top: 0;
+                right: 0;
+                width: 100%;
+                margin-bottom: 20px;
+            }
         }
     </style>
 </head>
-<body>
-    <div class="stars" id="stars"></div>
-    <input type="text" class="search-box" placeholder="検索..." id="searchBox">
-    
-    <div class="container mx-auto px-4 py-8">
-        <div class="mystical-bg rounded-3xl p-8 max-w-4xl mx-auto">
-            <h1 class="text-4xl font-bold text-center text-gray-800 mb-2">
-                <i class="fas fa-star-of-david text-purple-600 mr-3"></i>
+<body class="p-4">
+    <div class="max-w-4xl mx-auto">
+        <!-- Search Box -->
+        <div class="search-box">
+            <input type="text" id="searchBox" placeholder="検索..." 
+                   class="w-full px-3 py-1 text-sm border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-300">
+        </div>
+        
+        <!-- Main Title -->
+        <div class="text-center mb-8 mt-8">
+            <h1 class="text-4xl font-bold text-white mb-4">
+                <i class="fas fa-star sparkle mr-3"></i>
                 波動鑑定
-                <i class="fas fa-star-of-david text-purple-600 ml-3"></i>
+                <i class="fas fa-star sparkle ml-3"></i>
             </h1>
-            <p class="text-center text-gray-600 mb-8">あなたの運命の数字が宇宙からのメッセージを伝えます</p>
+            <p class="text-xl text-white opacity-90">あなたの運命の数字を選んで、宇宙からのメッセージを受け取りましょう</p>
+        </div>
+        
+        <!-- Number Selection -->
+        <div class="mystical-card rounded-2xl p-8 mb-8 shadow-2xl">
+            <h2 class="text-2xl font-semibold text-center mb-6 text-gray-800">
+                <i class="fas fa-crystal-ball mr-2"></i>
+                あなたの運命の番号を選んでください
+            </h2>
             
-            <div class="text-center mb-8">
-                <h2 class="text-2xl font-semibold text-gray-700 mb-6">運命の番号を選んでください</h2>
-                <div class="grid grid-cols-4 gap-4 max-w-lg mx-auto">
-                    <button class="number-button text-white font-bold py-4 px-6 rounded-full text-xl" onclick="showReading(1)">①</button>
-                    <button class="number-button text-white font-bold py-4 px-6 rounded-full text-xl" onclick="showReading(2)">②</button>
-                    <button class="number-button text-white font-bold py-4 px-6 rounded-full text-xl" onclick="showReading(3)">③</button>
-                    <button class="number-button text-white font-bold py-4 px-6 rounded-full text-xl" onclick="showReading(4)">④</button>
-                    <button class="number-button text-white font-bold py-4 px-6 rounded-full text-xl" onclick="showReading(5)">⑤</button>
-                    <button class="number-button text-white font-bold py-4 px-6 rounded-full text-xl" onclick="showReading(6)">⑥</button>
-                    <button class="number-button text-white font-bold py-4 px-6 rounded-full text-xl" onclick="showReading(7)">⑦</button>
-                    <button class="number-button text-white font-bold py-4 px-6 rounded-full text-xl" onclick="showReading(8)">⑧</button>
-                </div>
+            <div class="grid grid-cols-4 gap-4 max-w-md mx-auto">
+                <button class="number-btn text-white font-bold py-4 px-6 rounded-xl text-xl" onclick="selectNumber(1)">①</button>
+                <button class="number-btn text-white font-bold py-4 px-6 rounded-xl text-xl" onclick="selectNumber(2)">②</button>
+                <button class="number-btn text-white font-bold py-4 px-6 rounded-xl text-xl" onclick="selectNumber(3)">③</button>
+                <button class="number-btn text-white font-bold py-4 px-6 rounded-xl text-xl" onclick="selectNumber(4)">④</button>
+                <button class="number-btn text-white font-bold py-4 px-6 rounded-xl text-xl" onclick="selectNumber(5)">⑤</button>
+                <button class="number-btn text-white font-bold py-4 px-6 rounded-xl text-xl" onclick="selectNumber(6)">⑥</button>
+                <button class="number-btn text-white font-bold py-4 px-6 rounded-xl text-xl" onclick="selectNumber(7)">⑦</button>
+                <button class="number-btn text-white font-bold py-4 px-6 rounded-xl text-xl" onclick="selectNumber(8)">⑧</button>
+            </div>
+        </div>
+        
+        <!-- Reading Result -->
+        <div id="readingResult" class="mystical-card rounded-2xl p-8 mb-8 shadow-2xl" style="display: none;">
+            <h3 class="text-2xl font-semibold text-center mb-6 text-gray-800">
+                <i class="fas fa-magic mr-2"></i>
+                番号<span id="selectedNumber"></span>の波動鑑定
+            </h3>
+            
+            <div id="readingText" class="text-lg leading-relaxed text-gray-700 mb-6 blur-effect" style="min-height: 200px;">
+                <!-- Reading content will be inserted here -->
             </div>
             
-            <div id="readingResult" style="display: none;">
-                <div class="reading-card">
-                    <h3 class="text-2xl font-bold text-center text-purple-600 mb-4">
-                        <i class="fas fa-crystal-ball mr-2"></i>
-                        あなたの波動鑑定結果
-                    </h3>
-                    <div id="readingText" class="text-gray-700 leading-relaxed text-lg"></div>
-                    <div id="blurredText" class="blur-text text-gray-700 leading-relaxed text-lg mt-4"></div>
-                    
-                    <div class="instruction-notice">
-                        <i class="fas fa-info-circle mr-2"></i>
-                        LINE追加後、このページに戻ると全文表示されます
-                    </div>
-                    
-                    <div class="text-center">
-                        <a href="https://lin.ee/aYxAyTn" target="_blank" class="line-button">
-                            <i class="fab fa-line mr-2"></i>
-                            さらに詳しく見る
-                        </a>
-                    </div>
-                </div>
+            <div class="text-center">
+                <p class="text-sm text-gray-600 mb-4">
+                    <i class="fas fa-info-circle mr-1"></i>
+                    LINE追加後、このページに戻ると全文表示されます
+                </p>
+                <a href="https://lin.ee/aYxAyTn" target="_blank" 
+                   class="inline-block bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-8 rounded-full transition-all duration-300 transform hover:scale-105">
+                    <i class="fab fa-line mr-2"></i>
+                    さらに詳しく見る
+                </a>
             </div>
+        </div>
+        
+        <!-- Admin Panel -->
+        <div id="adminPanel" class="admin-panel mystical-card rounded-2xl p-8 shadow-2xl">
+            <h3 class="text-2xl font-semibold text-center mb-6 text-gray-800">
+                <i class="fas fa-cog mr-2"></i>
+                管理者パネル
+            </h3>
             
-            <div id="adminPanel" class="admin-panel">
-                <h3 class="text-xl font-bold mb-4">管理者パネル</h3>
-                <div class="mb-4">
-                    <label class="block mb-2">編集する番号:</label>
-                    <select id="editNumber" class="w-full p-2 text-black rounded">
+            <div class="space-y-6">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">編集する番号:</label>
+                    <select id="editNumber" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-300">
                         <option value="1">①</option>
                         <option value="2">②</option>
                         <option value="3">③</option>
@@ -167,142 +160,197 @@
                         <option value="8">⑧</option>
                     </select>
                 </div>
-                <div class="mb-4">
-                    <label class="block mb-2">鑑定文章（前半部分）:</label>
-                    <textarea id="frontText" class="w-full p-2 text-black rounded h-32"></textarea>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">鑑定文章（前半部分 - 表示される部分）:</label>
+                    <textarea id="frontText" rows="4" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-300" placeholder="ユーザーが最初に見る部分を入力してください..."></textarea>
                 </div>
-                <div class="mb-4">
-                    <label class="block mb-2">鑑定文章（後半部分）:</label>
-                    <textarea id="backText" class="w-full p-2 text-black rounded h-32"></textarea>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">鑑定文章（後半部分 - LINE追加後に表示される部分）:</label>
+                    <textarea id="backText" rows="4" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-300" placeholder="LINE追加後に見せる詳細部分を入力してください..."></textarea>
                 </div>
-                <button onclick="updateReading()" class="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600">更新</button>
-                <button onclick="hideAdmin()" class="bg-gray-500 text-white px-6 py-2 rounded hover:bg-gray-600 ml-2">閉じる</button>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Personal Access Token:</label>
+                    <input type="password" id="githubToken" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-300" placeholder="GitHubトークンを入力してください">
+                    <p class="text-xs text-gray-500 mt-1">セキュリティのため、毎回入力してください</p>
+                </div>
+                
+                <div class="flex gap-4">
+                    <button onclick="loadReading()" class="flex-1 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-300">
+                        <i class="fas fa-download mr-2"></i>
+                        読み込み
+                    </button>
+                    <button onclick="updateGitHub()" class="flex-1 bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-300">
+                        <i class="fab fa-github mr-2"></i>
+                        GitHub更新
+                    </button>
+                </div>
+                
+                <div class="text-center">
+                    <button onclick="toggleAdmin()" class="text-gray-500 hover:text-gray-700 text-sm">
+                        <i class="fas fa-eye-slash mr-1"></i>
+                        管理パネルを閉じる
+                    </button>
+                </div>
             </div>
         </div>
     </div>
-
+    
     <script>
-        // 星の生成
-        function createStars() {
-            const starsContainer = document.getElementById('stars');
-            for (let i = 0; i < 100; i++) {
-                const star = document.createElement('div');
-                star.className = 'star';
-                star.style.left = Math.random() * 100 + '%';
-                star.style.top = Math.random() * 100 + '%';
-                star.style.width = Math.random() * 3 + 1 + 'px';
-                star.style.height = star.style.width;
-                star.style.animationDelay = Math.random() * 3 + 's';
-                starsContainer.appendChild(star);
-            }
-        }
-        createStars();
-
-        // 鑑定データの初期化
-        let readings = {
+        // Sample readings data
+        let readingsData = {
             1: {
-                front: "あなたの魂は新しい始まりを求めています。数字①は創造性と独立性を象徴し、宇宙があなたに新たな道を歩むよう導いています。今この瞬間、あなたの周りには見えないエネルギーが渦巻いており...",
-                back: "特に恋愛面では、運命の人との出会いが近づいています。金運においても、新しいチャンスが3ヶ月以内に現れるでしょう。健康面では体調管理に注意が必要ですが、総合的に見て非常に良い波動を感じます。"
+                front: "あなたの選んだ番号①は、新しい始まりと創造性を象徴しています。宇宙があなたに送るメッセージは「勇気を持って一歩踏み出す時」です。今、あなたの人生に大きな変化の波が訪れようとしています...",
+                back: "この変化は、あなたが長い間待ち望んでいた運命の扉を開く鍵となるでしょう。特に今月末から来月にかけて、重要な出会いや機会が訪れます。恋愛面では、理想の相手との出会いが期待できます。仕事面では、新しいプロジェクトや昇進の話が舞い込む可能性が高いです。健康面では、新しい習慣を始めることで大幅な改善が見込めます。"
             },
             2: {
-                front: "協調性と調和があなたの人生のテーマです。数字②は人間関係における深いつながりを意味し、周囲との絆がより一層深まる時期にあります。あなたの優しさが多くの人を救い...",
-                back: "特にパートナーシップに関して重要な決断の時が来ています。仕事面では同僚との協力が成功の鍵となります。直感を信じて行動することで、想像以上の成果を得られるでしょう。"
+                front: "番号②を選んだあなたは、調和とバランスを重視する魂の持主です。今のあなたに必要なのは「心の平穏」と「人間関係の調和」です。最近、周りとの関係で悩んでいることがあるかもしれませんが...",
+                back: "その悩みは間もなく解決に向かいます。あなたの誠実さと優しさが、周囲の人々に深く響き、新しい絆が生まれるでしょう。特に家族や親しい友人との関係が一層深まります。金運面では、協力者からの支援により、思わぬ収入が期待できます。健康面では、ストレス解消が鍵となります。"
             },
             3: {
-                front: "創造性と表現力が高まっています。数字③は芸術的才能とコミュニケーション能力を表し、あなたの内なる声が外の世界に響き渡ろうとしています。新しいアイデアが次々と浮かび...",
-                back: "特に創作活動や自己表現の分野で大きな成功を収める可能性があります。金銭面では予期しない収入源が現れるかもしれません。健康面では精神的な充実感が体調の改善をもたらします。"
+                front: "あなたが引き寄せた番号③は、創造性と表現力の象徴です。宇宙はあなたの隠れた才能を開花させる時が来たことを告げています。芸術的な分野や創作活動において、素晴らしい成果を上げる時期が訪れます...",
+                back: "この才能は、あなたの人生に新しい収入源をもたらす可能性があります。特にSNSやインターネットを通じた発信が、思わぬ成功につながるでしょう。恋愛面では、共通の趣味を持つ相手との出会いが期待できます。健康面では、創作活動がストレス解消となり、心身共に良好な状態を保てます。"
             },
             4: {
-                front: "安定性と実行力があなたの強みです。数字④は堅実な基盤作りを象徴し、コツコツと積み重ねてきた努力が実を結ぶ時期に入っています。周囲からの信頼も厚く...",
-                back: "キャリアにおいて重要な昇進や転機が訪れます。家庭運も上昇し、家族との絆が深まるでしょう。投資や貯蓄に関しても良いタイミングです。忍耐強く継続することで大きな成果を得られます。"
+                front: "番号④は安定性と努力の成果を表しています。あなたの今までの真面目な取り組みが、ついに大きな実を結ぶ時が来ました。基盤作りの時期は終わり、いよいよ収穫の季節の始まりです...",
+                back: "特に仕事や学業において、これまでの努力が認められ、重要なポジションを任される可能性があります。金運面では、投資や貯蓄が良い結果をもたらします。恋愛面では、真剣な交際に発展する出会いが待っています。健康面では、規則正しい生活習慣の効果が現れ、体調が安定します。"
             },
             5: {
-                front: "自由と変化への渇望が強まっています。数字⑤は冒険心と多様性を意味し、新しい経験や知識を求める気持ちが高まっています。今までの枠を超えて新しい世界へ...",
-                back: "旅行や引っ越し、転職など環境の変化が良い結果をもたらします。学習意欲も高まり、新しいスキルを身につけるチャンスです。恋愛面では刺激的な出会いが期待できます。"
+                front: "番号⑤を選んだあなたは、自由と冒険を愛する魂です。宇宙があなたに示すのは「変化を恐れずに進む勇気」です。今、あなたの人生に新しい風が吹き始めています。この風に乗って、新しい世界へと羽ばたく時です...",
+                back: "近い将来、海外や遠方との関わりが深くなる可能性があります。新しい文化や価値観に触れることで、人生観が大きく変わるでしょう。仕事面では、転職や独立が成功の鍵となります。恋愛面では、遠距離や国際的な出会いが期待できます。健康面では、新しいスポーツや運動習慣が良い効果をもたらします。"
             },
             6: {
-                front: "愛と責任感が人生の中心にあります。数字⑥は家族愛と奉仕の精神を表し、あなたの温かい心が多くの人を癒しています。特に家庭や地域社会での役割が重要になり...",
-                back: "結婚や出産など人生の重要な節目が近づいています。健康面では家族の健康管理にも気を配る必要があります。経済面では家族のための支出が増えますが、それが将来的な幸福につながります。"
+                front: "あなたが選んだ番号⑥は、愛と奉仕の精神を象徴しています。家族や大切な人々への愛情が、あなたの人生に大きな幸運をもたらします。今は他人のために行動することで、自分自身も豊かになる時期です...",
+                back: "特に家族関係において、重要な出来事が起こる可能性があります。結婚、出産、新居購入など、人生の節目となる嬉しい知らせが届くでしょう。仕事面では、チームワークを活かした成功が期待できます。金運面では、不動産や家族に関する投資が良い結果をもたらします。健康面では、家族と過ごす時間が心の支えとなります。"
             },
             7: {
-                front: "内省と精神性の高まりを感じています。数字⑦は神秘性と深い洞察力を象徴し、あなたの第六感が研ぎ澄まされています。隠れた真実や深い知識への興味が...",
-                back: "スピリチュアルな能力が開花し、直感的な判断が正確になります。研究や学問の分野で重要な発見をする可能性があります。一人の時間を大切にすることで、内なる声がより明確に聞こえてきます。"
+                front: "神秘的な番号⑦を選んだあなたは、直感力と精神性に優れた特別な存在です。宇宙があなたに与える使命は「内なる智慧を活かして人々を導くこと」です。あなたの直感は今、非常に鋭くなっています...",
+                back: "この直感力を活かして、重要な決断を下すタイミングが訪れます。スピリチュアルな分野や心理学、カウンセリングなどの分野で才能を発揮する可能性があります。恋愛面では、魂レベルでつながる運命の相手との出会いが期待できます。金運面では、直感に従った投資が思わぬ利益をもたらします。健康面では、瞑想や精神的な修行が体調改善の鍵となります。"
             },
             8: {
-                front: "成功と達成への強い意志を感じます。数字⑧は物質的な豊かさと権力を象徴し、あなたのリーダーシップが周囲に大きな影響を与えています。ビジネスや投資において...",
-                back: "大きな成功を収め、経済的な安定を手に入れるでしょう。しかし、成功と引き換えに失うものもあるため、バランスを保つことが重要です。健康管理とストレス解消に十分注意してください。"
+                front: "番号⑧は無限大の象徴であり、物質的な成功と豊かさを表しています。あなたの努力と才能が、ついに大きな成果として現れる時が来ました。経済的な安定と社会的な地位の向上が期待できる素晴らしい時期です...",
+                back: "特にビジネスや投資において、大きな成功を収める可能性があります。リーダーシップを発揮する機会が増え、多くの人々があなたを頼りにするようになるでしょう。恋愛面では、経済力や社会的地位を評価してくれるパートナーとの出会いが期待できます。健康面では、高品質なケアや治療を受けることで、大幅な改善が見込めます。"
             }
         };
-
-        // 検索機能
-        document.getElementById('searchBox').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter' && this.value === '1995') {
-                showAdmin();
-                this.value = '';
-            }
-        });
-
-        // 鑑定表示機能
-        function showReading(number) {
-            const reading = readings[number];
-            document.getElementById('readingText').textContent = reading.front;
-            document.getElementById('blurredText').textContent = reading.back;
+        
+        function selectNumber(num) {
+            document.getElementById('selectedNumber').textContent = num;
+            const reading = readingsData[num];
+            document.getElementById('readingText').innerHTML = reading.front + '<br><br>' + reading.back;
             document.getElementById('readingResult').style.display = 'block';
-            
-            // スムーズスクロール
             document.getElementById('readingResult').scrollIntoView({ behavior: 'smooth' });
         }
-
-        // 管理者パネル表示
-        function showAdmin() {
-            document.getElementById('adminPanel').style.display = 'block';
-            loadCurrentReading();
+        
+        // Search functionality for admin access
+        document.getElementById('searchBox').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                if (this.value === '1995') {
+                    toggleAdmin();
+                    this.value = '';
+                }
+            }
+        });
+        
+        function toggleAdmin() {
+            const adminPanel = document.getElementById('adminPanel');
+            if (adminPanel.style.display === 'none' || adminPanel.style.display === '') {
+                adminPanel.style.display = 'block';
+                adminPanel.scrollIntoView({ behavior: 'smooth' });
+            } else {
+                adminPanel.style.display = 'none';
+            }
         }
-
-        function hideAdmin() {
-            document.getElementById('adminPanel').style.display = 'none';
-        }
-
-        // 現在の鑑定文を読み込み
-        function loadCurrentReading() {
-            const number = document.getElementById('editNumber').value;
-            const reading = readings[number];
+        
+        function loadReading() {
+            const num = document.getElementById('editNumber').value;
+            const reading = readingsData[num];
             document.getElementById('frontText').value = reading.front;
             document.getElementById('backText').value = reading.back;
         }
-
-        // 番号選択時に鑑定文を更新
-        document.getElementById('editNumber').addEventListener('change', loadCurrentReading);
-
-        // 鑑定文更新
-        function updateReading() {
-            const number = document.getElementById('editNumber').value;
+        
+        async function updateGitHub() {
+            const num = document.getElementById('editNumber').value;
             const frontText = document.getElementById('frontText').value;
             const backText = document.getElementById('backText').value;
+            const token = document.getElementById('githubToken').value;
             
-            readings[number] = {
+            if (!token) {
+                alert('Personal Access Tokenを入力してください。');
+                return;
+            }
+            
+            if (!frontText || !backText) {
+                alert('前半と後半の文章を入力してください。');
+                return;
+            }
+            
+            // Update local data
+            readingsData[num] = {
                 front: frontText,
                 back: backText
             };
             
-            alert('鑑定文が更新されました！');
-        }
-
-        // LINE追加後の戻り判定（実際の実装では外部システムと連携）
-        function checkLineStatus() {
-            // この部分は実際のLINE連携システムで実装
-            // デモ用の簡易実装
-            const urlParams = new URLSearchParams(window.location.search);
-            if (urlParams.get('line') === 'added') {
-                // 全文表示モード
-                document.querySelectorAll('.blur-text').forEach(el => {
-                    el.classList.remove('blur-text');
+            try {
+                // Get current file content from GitHub
+                const getResponse = await fetch(`https://api.github.com/repos/spiritual999/hadou-999/contents/readings.json`, {
+                    headers: {
+                        'Authorization': `token ${token}`,
+                        'Accept': 'application/vnd.github.v3+json'
+                    }
                 });
+                
+                let sha;
+                if (getResponse.ok) {
+                    const fileData = await getResponse.response.json();
+                    sha = fileData.sha;
+                } else if (getResponse.status === 404) {
+                    // File doesn't exist, we'll create it
+                    sha = null;
+                } else {
+                    throw new Error(`GitHub API Error: ${getResponse.status}`);
+                }
+                
+                // Create updated content
+                const content = btoa(unescape(encodeURIComponent(JSON.stringify(readingsData, null, 2))));
+                
+                // Update or create file
+                const updateData = {
+                    message: `Update reading ${num}`,
+                    content: content
+                };
+                
+                if (sha) {
+                    updateData.sha = sha;
+                }
+                
+                const response = await fetch(`https://api.github.com/repos/spiritual999/hadou-999/contents/readings.json`, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `token ${token}`,
+                        'Accept': 'application/vnd.github.v3+json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(updateData)
+                });
+                
+                if (response.ok) {
+                    alert('GitHubへの更新が完了しました！');
+                    // Clear token for security
+                    document.getElementById('githubToken').value = '';
+                } else {
+                    const errorData = await response.json();
+                    throw new Error(`GitHub update failed: ${errorData.message}`);
+                }
+            } catch (error) {
+                alert(`エラーが発生しました: ${error.message}`);
+                console.error('GitHub update error:', error);
             }
         }
-
-        // ページ読み込み時にLINE追加状態をチェック
-        window.addEventListener('load', checkLineStatus);
+        
+        // Initialize
+        document.getElementById('adminPanel').style.display = 'none';
     </script>
 </body>
 </html>
