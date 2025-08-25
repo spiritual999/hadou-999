@@ -3,212 +3,196 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>【波動鑑定】あなたの運命数を読み取ります</title>
+    <title>波動鑑定 - 運命の数字があなたを導きます</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Noto Serif JP', serif;
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a0d2e 25%, #16213e 50%, #0f3460 75%, #533483 100%);
+            font-family: 'Noto Sans JP', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 25%, #0f0f3c  50%, #1a1a2e 75%, #16213e 100%);
             min-height: 100vh;
-            color: #f0f0f0;
+            color: #ffffff;
         }
         
-        .mystical-bg {
-            background: radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
-                        radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.2) 0%, transparent 50%);
+        .mystical-card {
+            background: linear-gradient(145deg, #2a2a4e, #1e1e3a);
+            border: 2px solid #4a4a8a;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6), 0 0 20px rgba(138, 43, 226, 0.3);
+            backdrop-filter: blur(10px);
         }
         
         .number-btn {
-            background: linear-gradient(145deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: all 0.4s ease;
-            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+            background: linear-gradient(145deg, #3a3a6e, #2a2a4e);
+            border: 3px solid #6a4c93;
+            color: #ffffff;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-size: 1.2rem;
         }
         
         .number-btn:hover {
-            background: linear-gradient(145deg, rgba(255, 215, 0, 0.3), rgba(255, 215, 0, 0.1));
-            border: 1px solid rgba(255, 215, 0, 0.5);
+            background: linear-gradient(145deg, #4a4a7e, #3a3a5e);
+            border-color: #8a4fc7;
+            box-shadow: 0 0 20px rgba(138, 79, 199, 0.6);
             transform: translateY(-2px);
-            box-shadow: 0 12px 40px rgba(255, 215, 0, 0.2);
         }
         
-        .reading-card {
-            background: linear-gradient(145deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 16px 64px rgba(0, 0, 0, 0.3);
-        }
-        
-        .gold-text {
-            background: linear-gradient(135deg, #ffd700, #ffed4e, #ffd700);
+        .title-text {
+            font-family: 'Cinzel', serif;
+            background: linear-gradient(45deg, #ffffff, #e0e0ff, #c0c0ff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            text-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
         }
         
-        .search-input {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(10px);
+        .reading-content {
+            background: linear-gradient(145deg, #2a2a4e, #1e1e3a);
+            border: 2px solid #4a4a8a;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+            color: #ffffff;
+            line-height: 1.8;
         }
         
-        .admin-panel {
-            background: linear-gradient(145deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 215, 0, 0.3);
-        }
-        
-        .line-btn {
-            background: linear-gradient(145deg, #00c851, #007e33);
-            box-shadow: 0 8px 32px rgba(0, 200, 81, 0.3);
+        .line-cta {
+            background: linear-gradient(145deg, #06c755, #04a03c);
+            border: 2px solid #06c755;
+            color: #ffffff;
+            font-weight: 600;
             transition: all 0.3s ease;
         }
         
-        .line-btn:hover {
+        .line-cta:hover {
+            background: linear-gradient(145deg, #08d15f, #05b042);
+            box-shadow: 0 0 20px rgba(6, 199, 85, 0.6);
             transform: translateY(-2px);
-            box-shadow: 0 12px 40px rgba(0, 200, 81, 0.4);
         }
         
-        .floating-particles {
-            position: fixed;
-            pointer-events: none;
-            width: 100%;
-            height: 100%;
+        .search-box {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: #ffffff;
+        }
+        
+        .search-box::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .admin-panel {
+            background: linear-gradient(145deg, #3a3a6e, #2a2a4e);
+            border: 2px solid #6a4c93;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8);
+        }
+        
+        .admin-textarea {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: #ffffff;
+            resize: vertical;
+        }
+        
+        .admin-textarea::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .stars-bg::before {
+            content: '';
+            position: absolute;
             top: 0;
             left: 0;
-            z-index: 1;
-        }
-        
-        .particle {
-            position: absolute;
-            background: rgba(255, 215, 0, 0.6);
-            border-radius: 50%;
-            animation: float 6s ease-in-out infinite;
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0; }
-            50% { transform: translateY(-100px) rotate(180deg); opacity: 1; }
-        }
-        
-        .fade-in {
-            animation: fadeIn 0.8s ease-out;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(2px 2px at 20px 30px, #ffffff, transparent),
+                radial-gradient(2px 2px at 40px 70px, rgba(255,255,255,0.8), transparent),
+                radial-gradient(1px 1px at 90px 40px, #ffffff, transparent),
+                radial-gradient(1px 1px at 130px 80px, rgba(255,255,255,0.6), transparent);
+            background-repeat: repeat;
+            background-size: 200px 100px;
+            opacity: 0.3;
+            pointer-events: none;
         }
     </style>
 </head>
-<body class="mystical-bg">
-    <div class="floating-particles" id="particles"></div>
-    
-    <div class="container mx-auto px-4 py-8 relative z-10">
-        <!-- Header -->
-        <div class="text-center mb-12">
-            <div class="flex justify-end mb-4">
-                <input type="text" id="searchInput" placeholder="検索..." 
-                       class="search-input px-4 py-2 rounded-lg text-white placeholder-gray-400 text-sm w-32">
-            </div>
-            
-            <div class="mb-8">
-                <i class="fas fa-stars text-6xl gold-text mb-4"></i>
-                <h1 class="text-4xl md:text-5xl font-bold gold-text mb-4">波動鑑定</h1>
-                <p class="text-xl text-gray-300 font-light">あなたの運命数を選んで、宇宙からのメッセージを受け取りましょう</p>
-            </div>
+<body class="relative stars-bg">
+    <!-- Header -->
+    <header class="text-center py-12 relative z-10">
+        <div class="absolute top-4 right-4">
+            <input type="text" id="searchBox" placeholder="検索..." class="search-box px-3 py-2 rounded-lg text-sm w-32">
         </div>
+        
+        <h1 class="title-text text-5xl md:text-6xl font-bold mb-4">
+            <i class="fas fa-star-of-david mr-4"></i>
+            波動鑑定
+            <i class="fas fa-star-of-david ml-4"></i>
+        </h1>
+        <p class="text-xl md:text-2xl text-gray-300 mb-8">
+            運命の数字があなたを導きます
+        </p>
+        <div class="flex justify-center items-center text-lg text-gray-400">
+            <i class="fas fa-moon mr-2"></i>
+            <span>あなたの番号を選んで、宇宙からのメッセージを受け取りましょう</span>
+            <i class="fas fa-sun ml-2"></i>
+        </div>
+    </header>
 
-        <!-- Number Selection -->
-        <div id="numberSelection" class="mb-16">
-            <h2 class="text-2xl font-semibold text-center mb-8 text-gray-200">
-                <i class="fas fa-crystal-ball mr-3 gold-text"></i>
+    <!-- Number Selection -->
+    <div class="container mx-auto px-4 py-8">
+        <div class="mystical-card rounded-3xl p-8 mb-12 max-w-4xl mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-8 text-white">
+                <i class="fas fa-compass mr-3"></i>
                 あなたの運命の番号を選んでください
+                <i class="fas fa-compass ml-3"></i>
             </h2>
-            
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
-                <button class="number-btn p-6 rounded-2xl text-2xl font-bold hover:scale-105 transition-transform" onclick="showReading(1)">
-                    <i class="fas fa-circle-1 mb-2 block gold-text text-3xl"></i>
-                    ①
-                </button>
-                <button class="number-btn p-6 rounded-2xl text-2xl font-bold hover:scale-105 transition-transform" onclick="showReading(2)">
-                    <i class="fas fa-circle-2 mb-2 block gold-text text-3xl"></i>
-                    ②
-                </button>
-                <button class="number-btn p-6 rounded-2xl text-2xl font-bold hover:scale-105 transition-transform" onclick="showReading(3)">
-                    <i class="fas fa-circle-3 mb-2 block gold-text text-3xl"></i>
-                    ③
-                </button>
-                <button class="number-btn p-6 rounded-2xl text-2xl font-bold hover:scale-105 transition-transform" onclick="showReading(4)">
-                    <i class="fas fa-circle-4 mb-2 block gold-text text-3xl"></i>
-                    ④
-                </button>
-                <button class="number-btn p-6 rounded-2xl text-2xl font-bold hover:scale-105 transition-transform" onclick="showReading(5)">
-                    <i class="fas fa-circle-5 mb-2 block gold-text text-3xl"></i>
-                    ⑤
-                </button>
-                <button class="number-btn p-6 rounded-2xl text-2xl font-bold hover:scale-105 transition-transform" onclick="showReading(6)">
-                    <i class="fas fa-circle-6 mb-2 block gold-text text-3xl"></i>
-                    ⑥
-                </button>
-                <button class="number-btn p-6 rounded-2xl text-2xl font-bold hover:scale-105 transition-transform" onclick="showReading(7)">
-                    <i class="fas fa-circle-7 mb-2 block gold-text text-3xl"></i>
-                    ⑦
-                </button>
-                <button class="number-btn p-6 rounded-2xl text-2xl font-bold hover:scale-105 transition-transform" onclick="showReading(8)">
-                    <i class="fas fa-circle-8 mb-2 block gold-text text-3xl"></i>
-                    ⑧
-                </button>
+            <div class="grid grid-cols-4 gap-6 max-w-2xl mx-auto">
+                <button onclick="showReading(1)" class="number-btn py-6 px-4 rounded-xl">①</button>
+                <button onclick="showReading(2)" class="number-btn py-6 px-4 rounded-xl">②</button>
+                <button onclick="showReading(3)" class="number-btn py-6 px-4 rounded-xl">③</button>
+                <button onclick="showReading(4)" class="number-btn py-6 px-4 rounded-xl">④</button>
+                <button onclick="showReading(5)" class="number-btn py-6 px-4 rounded-xl">⑤</button>
+                <button onclick="showReading(6)" class="number-btn py-6 px-4 rounded-xl">⑥</button>
+                <button onclick="showReading(7)" class="number-btn py-6 px-4 rounded-xl">⑦</button>
+                <button onclick="showReading(8)" class="number-btn py-6 px-4 rounded-xl">⑧</button>
             </div>
         </div>
 
         <!-- Reading Display -->
-        <div id="readingDisplay" class="hidden fade-in">
-            <div class="reading-card rounded-3xl p-8 md:p-12 max-w-4xl mx-auto">
-                <div class="text-center mb-8">
-                    <button onclick="goBack()" class="text-gray-400 hover:text-gold-300 transition-colors mb-4">
-                        <i class="fas fa-arrow-left mr-2"></i>戻る
-                    </button>
-                    <h2 id="readingTitle" class="text-3xl font-bold gold-text mb-4"></h2>
-                </div>
+        <div id="readingDisplay" class="hidden max-w-4xl mx-auto">
+            <div class="reading-content rounded-3xl p-8 mb-8">
+                <div id="readingContent" class="text-lg leading-relaxed"></div>
                 
-                <div id="readingContent" class="text-lg leading-relaxed text-gray-200 space-y-6"></div>
-                
-                <div class="mt-12 text-center">
-                    <div class="bg-gray-800 bg-opacity-50 rounded-2xl p-6 mb-6">
-                        <h3 class="text-xl font-semibold gold-text mb-4">
-                            <i class="fas fa-user-tie mr-2"></i>
-                            個人鑑定をご希望の方へ
-                        </h3>
-                        <p class="text-gray-300 mb-4">
-                            より詳細で個別化された鑑定をお求めの方は、<br>
-                            専門の鑑定師による個人セッションをご利用ください。
-                        </p>
-                        <a href="https://lin.ee/aYxAyTn" target="_blank" 
-                           class="line-btn inline-flex items-center px-8 py-3 rounded-full text-white font-semibold hover:transform hover:scale-105 transition-all">
-                            <i class="fab fa-line mr-2 text-xl"></i>
-                            個人鑑定のご相談はこちら
-                        </a>
-                    </div>
+                <!-- LINE CTA -->
+                <div class="mt-12 p-6 bg-gradient-to-r from-green-600 to-green-500 rounded-2xl text-center">
+                    <h3 class="text-2xl font-bold mb-4">
+                        <i class="fab fa-line mr-2"></i>
+                        個人鑑定ご希望の方はこちらへ
+                        <i class="fab fa-line ml-2"></i>
+                    </h3>
+                    <p class="mb-4 text-lg">より詳しい個人鑑定をお受けいただけます</p>
+                    <a href="https://lin.ee/aYxAyTn" target="_blank" class="line-cta inline-block px-8 py-4 rounded-xl text-xl font-bold">
+                        <i class="fab fa-line mr-2"></i>
+                        LINE公式アカウントへ
+                        <i class="fas fa-external-link-alt ml-2"></i>
+                    </a>
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- Admin Panel -->
-        <div id="adminPanel" class="hidden fade-in mt-16">
-            <div class="admin-panel rounded-3xl p-8 max-w-4xl mx-auto">
-                <h2 class="text-2xl font-bold gold-text mb-6 text-center">
-                    <i class="fas fa-cog mr-2"></i>
-                    管理者パネル
-                </h2>
-                
-                <div class="mb-6">
-                    <label class="block text-gray-300 mb-2">編集する番号:</label>
-                    <select id="editNumber" class="w-full p-3 rounded-lg bg-gray-800 border border-gray-600 text-white">
+    <!-- Admin Panel (Hidden by default) -->
+    <div id="adminPanel" class="hidden fixed top-0 left-0 w-full h-full bg-black bg-opacity-80 z-50">
+        <div class="admin-panel rounded-3xl p-8 max-w-4xl mx-auto mt-20">
+            <h2 class="text-3xl font-bold mb-6 text-center text-white">
+                <i class="fas fa-cog mr-3"></i>
+                管理者パネル
+                <i class="fas fa-cog ml-3"></i>
+            </h2>
+            
+            <div class="grid grid-cols-1 gap-6">
+                <div>
+                    <label class="block text-lg font-semibold mb-2 text-white">編集する番号:</label>
+                    <select id="editNumber" class="admin-textarea w-full p-3 rounded-lg">
                         <option value="1">①番</option>
                         <option value="2">②番</option>
                         <option value="3">③番</option>
@@ -220,18 +204,23 @@
                     </select>
                 </div>
                 
-                <div class="mb-6">
-                    <label class="block text-gray-300 mb-2">鑑定文章:</label>
-                    <textarea id="editContent" rows="15" 
-                              class="w-full p-4 rounded-lg bg-gray-800 border border-gray-600 text-white"
-                              placeholder="鑑定内容を入力してください..."></textarea>
+                <div>
+                    <label class="block text-lg font-semibold mb-2 text-white">鑑定文章:</label>
+                    <textarea id="readingText" class="admin-textarea w-full p-4 rounded-lg h-64" placeholder="鑑定文章を入力してください..."></textarea>
                 </div>
                 
-                <div class="text-center">
-                    <button onclick="updateReading()" 
-                            class="bg-gradient-to-r from-yellow-600 to-yellow-500 hover:from-yellow-500 hover:to-yellow-400 px-8 py-3 rounded-full text-white font-semibold transition-all hover:transform hover:scale-105">
+                <div class="flex gap-4">
+                    <button onclick="saveReading()" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg flex-1">
                         <i class="fas fa-save mr-2"></i>
-                        更新
+                        保存
+                    </button>
+                    <button onclick="loadReading()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg flex-1">
+                        <i class="fas fa-download mr-2"></i>
+                        読み込み
+                    </button>
+                    <button onclick="closeAdminPanel()" class="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-lg flex-1">
+                        <i class="fas fa-times mr-2"></i>
+                        閉じる
                     </button>
                 </div>
             </div>
@@ -239,10 +228,10 @@
     </div>
 
     <script>
-        const readingData = {
-            1: {
-                title: "①番を選んだあなたへ",
-                content: `あなたは今、世界で一番優しい "音なき声" の持ち主です。
+        // Default readings data
+        const defaultReadings = {
+            1: `①番を選んだあなたへ
+あなたは今、世界で一番優しい "音なき声" の持ち主です。
 
 本当は少し違うのにな、と思いながら美容室で「あ、大丈夫です」と微笑んでしまったり。本当は疲れていて早く帰りたいのに、友達からの「この後どうする？」の一言に「どこか行く？」と返してしまったり。LINEの返信で、本当は少しモヤッとしているのに「ありがとう！」「楽しみにしてるね！」と、明るい絵文字をつけて送ってしまったり。
 
@@ -264,11 +253,10 @@
 
 あなたが、あなた自身の"一番の味方"になってあげた時、閉じ込められていた無数の言葉たちは、あなたの人生を応援する、最も力強いエールとなって響き渡るでしょう。
 
-…あなたが飲み込んできた言葉一つひとつに、実はあなたの本当の才能や、魂が本当に望む生き方のヒントが隠されているとしたら、知りたくはありませんか？ その声に正しく耳を澄ませることができたなら、あなたの人生は、あなたが思う以上に、色鮮やかに輝き始めるかもしれません。`
-            },
-            2: {
-                title: "②番を選んだあなたへ",
-                content: `あなたは今、過去という名の美しいタイムカプセルを、大切に抱きしめている人です。
+…あなたが飲み込んできた言葉一つひとつに、実はあなたの本当の才能や、魂が本当に望む生き方のヒントが隠されているとしたら、知りたくはありませんか？ その声に正しく耳を澄ませることができたなら、あなたの人生は、あなたが思う以上に、色鮮やかに輝き始めるかもしれません。`,
+            
+            2: `🌀 ②番を選んだあなたへ
+あなたは今、過去という名の美しいタイムカプセルを、大切に抱きしめている人です。
 
 もう何の意味もないと分かっているのに、夜中にふと、別れた恋人のSNSを開いてしまったり。スマホのフォルダにある、二度と戻らないあの頃の楽しかった写真たちを、お守りのように何度も見返してしまったり。「あの時、もし勇気を出してああ言っていたら…」と、後悔という名のリプレイボタンを、心の中で何度も押してしまったり。
 
@@ -299,11 +287,10 @@
 
 あなたの物語は、悲劇なんかじゃありません。ただ、少しだけ美しい序章が長かっただけ。今、あなた自身の手で、次のページをめくる時が来たのです。
 
-…あなたが経験した過去の出来事の一つひとつが、実はあなたの未来を最高に輝かせるための、壮大な「伏線」だったとしたら？ その伏線を読み解き、あなたの人生の物語が迎える本当のハッピーエンドを知りたくなったなら、魂のコンパスが指し示す方角を、より詳しく見つめてみることで、新たな道が開けるかもしれません。`
-            },
-            3: {
-                title: "③番を選んだあなたへ",
-                content: `あなたは、無数のあなたを生きこなす、天才的なカメレオン女優です。
+…あなたが経験した過去の出来事の一つひとつが、実はあなたの未来を最高に輝かせるための、壮大な「伏線」だったとしたら？ その伏線を読み解き、あなたの人生の物語が迎える本当のハッピーエンドを知りたくなったなら、魂のコンパスが指し示す方角を、より詳しく見つめてみることで、新たな道が開けるかもしれません。`,
+            
+            3: `✨ ③番を選んだあなたへ
+あなたは、無数のあなたを生きこなす、天才的なカメレオン女優です。
 
 職場では、後輩から頼られる、しっかり者の「私」。気の置けない女友達の前では、少しだらしなくて、おどけてみせる「私」。そしてインスタグラムの中では、丁寧な暮らしやおしゃれを楽しむ、理想の「私」。
 
@@ -329,11 +316,10 @@
 
 それは、もはや誰かの真似ではない、ダイヤモンドのように多面的で、ミステリアスで、誰よりも魅力的な、あなただけの本物の輝きなのです。
 
-…あなたの中にいる、それぞれの女優（ペルソナ）が持つ固有の才能や役割を、もし正確に把握できるとしたら？ そして、その才能たちを掛け合わせることで、あなただけの「最強の私」を意図的に創り出せるとしたら…？ ご自身の才能の全貌に興味が湧いたなら、その輝きの源を、より深く覗き込んでみる価値はあるでしょう。`
-            },
-            4: {
-                title: "④番を選んだあなたへ",
-                content: `おめでとうございます。あなたは今、魂が最も大きく変容する、"特別なステージ" の幕開けに立っています。
+…あなたの中にいる、それぞれの女優（ペルソナ）が持つ固有の才能や役割を、もし正確に把握できるとしたら？ そして、その才能たちを掛け合わせることで、あなただけの「最強の私」を意図的に創り出せるとしたら…？ ご自身の才能の全貌に興味が湧いたなら、その輝きの源を、より深く覗き込んでみる価値はあるでしょう。`,
+            
+            4: `☄️ ④番を選んだあなたへ
+おめでとうございます。あなたは今、魂が最も大きく変容する、"特別なステージ" の幕開けに立っています。
 
 キラキラと輝いている友人の投稿を見て、祝福したい気持ちとは裏腹に、胸の奥がチクッと痛む、黒い感情。絶対にやり遂げようと決めたはずの目標を、三日坊主で諦めてしまう、弱い自分。「どうせ私なんて」と、自分を卑下することで、傷つくことから逃げようとする、臆病な自分。
 
@@ -367,11 +353,11 @@
 
 弱さを知る者だけが、本当の優しさを知っています。闇を知る者だけが、誰かの心を照らす、本物の光となるのです。
 
-…あなたが目を背けてきたその「影」こそが、実はあなたの人生を劇的に好転させ、あなただけの魅力を開花させるための"魔法の鍵"だとしたら、その使い方を知りたくはありませんか？ その鍵がどの扉を開けるのか、その秘密を解き明かしたいと感じるなら、それは魂が次の章へ進む準備ができた、何よりのサインなのかもしれません。`
-            },
-            5: {
-                title: "⑤番を選んだあなたへ",
-                content: `あなたは今、静寂の宇宙に浮かぶ、美しい蓮の花。それは、どんな喧騒の中でも、どんな困難の中にあっても、あなた自身の内なる光を信じて、強く生きている魂の姿です。
+…あなたが目を背けてきたその「影」こそが、実はあなたの人生を劇的に好転させ、あなただけの魅力を開花させるための"魔法の鍵"だとしたら、その使い方を知りたくはありませんか？ その鍵がどの扉を開けるのか、その秘密を解き明かしたいと感じるなら、それは魂が次の章へ進む準備ができた、何よりのサインなのかもしれません。`,
+            
+            5: `🌸 ⑤番を選んだあなたへ
+
+あなたは今、静寂の宇宙に浮かぶ、美しい蓮の花。それは、どんな喧騒の中でも、どんな困難の中にあっても、あなた自身の内なる光を信じて、強く生きている魂の姿です。
 
 最近、仕事や人間関係で、外部からのノイズやプレッシャーを感じることが増えていませんか？ たとえば、SNSで他人の華やかな投稿を見ては「自分はまだまだだ」と焦りを感じたり、上司や友人からの期待に応えようと頑張るほど、本当の自分が何を感じているのか分からなくなる。そんな瞬間があったかもしれません。
 
@@ -381,11 +367,10 @@
 
 あなたはすでに、多くの答えを自分の内側に持っています。どうか、その心の声に耳を澄ましてください。瞑想や静かな時間を持つことで、あなたはさらなる高みへと導かれるでしょう。あなたの人生は、あなたが思っている以上に、壮大な物語なのです。
 
-…あなたが魂の光をさらに輝かせ、人生の目的を明確に知るには、どのような心の声に耳を傾ければよいのでしょうか？ その鍵となる「第一歩」を知ることができれば、あなたの物語は、さらなる深みへと進んでいくでしょう。`
-            },
-            6: {
-                title: "⑥番を選んだあなたへ",
-                content: `あなたは、まだ見ぬ可能性を秘めた、探求者です。
+…あなたが魂の光をさらに輝かせ、人生の目的を明確に知るには、どのような心の声に耳を傾ければよいのでしょうか？ その鍵となる「第一歩」を知ることができれば、あなたの物語は、さらなる深みへと進んでいくでしょう。`,
+            
+            6: `🐟 ⑥番を選んだあなたへ
+あなたは、まだ見ぬ可能性を秘めた、探求者です。
 
 この神秘的な深海の庭園は、あなたの心の奥深くに眠る、豊かな創造性や感情の世界を象徴しています。あなたは、自分でも気づいていないかもしれない才能や、まだ開花していない可能性をたくさん持っています。
 
@@ -395,11 +380,10 @@
 
 あなたにしか見つけられない、あなただけの宝物が、深海にはたくさん眠っています。その一歩が、あなたの世界を何倍も広げるきっかけとなるでしょう。
 
-…あなたの心の奥底に眠る「本当の才能」を、もし正確に引き出すことができたなら？ その才能が指し示す、あなたが本当に輝ける世界を、もっと具体的に知ってみたくはありませんか？`
-            },
-            7: {
-                title: "⑦番を選んだあなたへ",
-                content: `あなたは、今この瞬間を、心から楽しむことができる達人です。
+…あなたの心の奥底に眠る「本当の才能」を、もし正確に引き出すことができたなら？ その才能が指し示す、あなたが本当に輝ける世界を、もっと具体的に知ってみたくはありませんか？`,
+            
+            7: `🌿 ⑦番を選んだあなたへ
+あなたは、今この瞬間を、心から楽しむことができる達人です。
 
 この一面に広がる花畑は、あなたが日々の生活の中に、小さな幸せや喜びをたくさん見つけていることを示しています。あなたは、特別な出来事を待つのではなく、朝起きて太陽の光を浴びたり、美味しいコーヒーを飲んだり、そんな何気ない瞬間に感謝する心を持っています。
 
@@ -409,11 +393,10 @@
 
 あなたはすでに、多くの幸福の中にいます。その感謝の気持ちを、言葉や行動で周りの人に伝えてみてください。あなたの周りに、さらに温かいエネルギーの循環が生まれるでしょう。
 
-…あなたの持つその「調和のエネルギー」は、実はあなたが思っている以上に、周囲の人々や環境に良い影響を与えています。その特別な才能を、もしもっと意図的に活かすことができたなら、あなたの人生はどのように広がるでしょうか？`
-            },
-            8: {
-                title: "⑧番を選んだあなたへ",
-                content: `あなたは今、人生の大きな転換期を迎えています。
+…あなたの持つその「調和のエネルギー」は、実はあなたが思っている以上に、周囲の人々や環境に良い影響を与えています。その特別な才能を、もしもっと意図的に活かすことができたなら、あなたの人生はどのように広がるでしょうか？`,
+            
+            8: `☄️ ⑧番を選んだあなたへ
+あなたは今、人生の大きな転換期を迎えています。
 
 この燃え盛る流星は、古い自分を燃やし尽くし、新しい自分へと生まれ変わろうとしている、あなたの魂の姿です。もしかしたら、あなたは今、仕事や人間関係で大きな決断を迫られていたり、これまでの自分を大きく変えるような出来事に直面しているかもしれません。
 
@@ -424,89 +407,65 @@
 あなたの心の中にある、新しい情熱やアイデアを信じて、勇気を持って一歩踏み出してください。その一歩が、あなたの未来を、あなたが想像もしていなかったほど、眩しい光で満たすでしょう。
 
 …あなたが今、心の中で感じている「変わりたい」という衝動は、具体的にどんな未来を創り出そうとしているのでしょうか？ そのエネルギーを正しく理解し、魂が本当に望む方向に導くための、具体的な「羅針盤」が手に入るとしたら、知りたくはありませんか？`
-            }
         };
 
-        // Load data from localStorage
-        function loadReadingData() {
-            const saved = localStorage.getItem('readingData');
-            if (saved) {
-                Object.assign(readingData, JSON.parse(saved));
-            }
+        // Load readings from localStorage or use defaults
+        function getReadings() {
+            const saved = localStorage.getItem('spiritualReadings');
+            return saved ? JSON.parse(saved) : defaultReadings;
         }
 
-        // Save data to localStorage
-        function saveReadingData() {
-            localStorage.setItem('readingData', JSON.stringify(readingData));
+        function showReading(number) {
+            const readings = getReadings();
+            const content = readings[number] || `${number}番の鑑定文章がまだ設定されていません。`;
+            
+            document.getElementById('readingContent').innerHTML = content.replace(/\n/g, '<br><br>');
+            document.getElementById('readingDisplay').classList.remove('hidden');
+            document.getElementById('readingDisplay').scrollIntoView({ behavior: 'smooth' });
         }
 
-        // Initialize
-        loadReadingData();
-
-        // Floating particles
-        function createParticles() {
-            const particlesContainer = document.getElementById('particles');
-            for (let i = 0; i < 20; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.width = Math.random() * 4 + 2 + 'px';
-                particle.style.height = particle.style.width;
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.animationDelay = Math.random() * 6 + 's';
-                particle.style.animationDuration = (Math.random() * 3 + 4) + 's';
-                particlesContainer.appendChild(particle);
+        function saveReading() {
+            const number = document.getElementById('editNumber').value;
+            const text = document.getElementById('readingText').value;
+            
+            if (!text.trim()) {
+                alert('鑑定文章を入力してください。');
+                return;
             }
+            
+            const readings = getReadings();
+            readings[number] = text;
+            localStorage.setItem('spiritualReadings', JSON.stringify(readings));
+            
+            alert('鑑定文章を保存しました。');
+        }
+
+        function loadReading() {
+            const number = document.getElementById('editNumber').value;
+            const readings = getReadings();
+            
+            document.getElementById('readingText').value = readings[number] || '';
+        }
+
+        function closeAdminPanel() {
+            document.getElementById('adminPanel').classList.add('hidden');
         }
 
         // Search functionality
-        document.getElementById('searchInput').addEventListener('input', function(e) {
+        document.getElementById('searchBox').addEventListener('input', function(e) {
             if (e.target.value === '1995') {
                 document.getElementById('adminPanel').classList.remove('hidden');
                 e.target.value = '';
             }
         });
 
-        // Show reading
-        function showReading(number) {
-            const reading = readingData[number];
-            document.getElementById('readingTitle').textContent = reading.title;
-            
-            const contentDiv = document.getElementById('readingContent');
-            const paragraphs = reading.content.split('\n\n');
-            contentDiv.innerHTML = paragraphs.map(p => `<p class="mb-4">${p}</p>`).join('');
-            
-            document.getElementById('numberSelection').classList.add('hidden');
-            document.getElementById('readingDisplay').classList.remove('hidden');
-        }
+        // Load reading when admin number changes
+        document.getElementById('editNumber').addEventListener('change', loadReading);
 
-        // Go back
-        function goBack() {
-            document.getElementById('readingDisplay').classList.add('hidden');
-            document.getElementById('numberSelection').classList.remove('hidden');
-        }
-
-        // Admin panel functions
-        document.getElementById('editNumber').addEventListener('change', function() {
-            const number = this.value;
-            const reading = readingData[number];
-            document.getElementById('editContent').value = reading.content;
+        // Initial load
+        document.addEventListener('DOMContentLoaded', function() {
+            loadReading();
         });
-
-        function updateReading() {
-            const number = document.getElementById('editNumber').value;
-            const content = document.getElementById('editContent').value;
-            
-            readingData[number].content = content;
-            saveReadingData();
-            
-            alert('更新が完了しました！');
-        }
-
-        // Initialize particles
-        createParticles();
-
-        // Auto-load first reading in admin panel
-        document.getElementById('editContent').value = readingData[1].content;
     </script>
 </body>
 </html>
